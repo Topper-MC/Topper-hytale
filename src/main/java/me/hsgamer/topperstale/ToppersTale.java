@@ -9,6 +9,7 @@ import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import me.hsgamer.hscore.config.gson.GsonConfig;
 import me.hsgamer.hscore.config.proxy.ConfigGenerator;
+import me.hsgamer.topperstale.commands.ExampleCommand;
 import me.hsgamer.topperstale.config.MainConfig;
 import me.hsgamer.topperstale.manager.TaskManager;
 import me.hsgamer.topperstale.template.HyTopTemplate;
@@ -30,6 +31,7 @@ public class ToppersTale extends JavaPlugin {
     @Override
     protected void setup() {
         topTemplate.enable();
+        getCommandRegistry().registerCommand(new ExampleCommand("message", "Message Command"));
         this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, event -> {
             Ref<EntityStore> playerRef = event.getPlayerRef();
             topTemplate.getTopManager().create(playerRef.getStore().ensureAndGetComponent(playerRef, UUIDComponent.getComponentType()).getUuid());
