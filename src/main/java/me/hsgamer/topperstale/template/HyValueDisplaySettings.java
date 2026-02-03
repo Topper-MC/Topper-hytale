@@ -10,7 +10,7 @@ public record HyValueDisplaySettings(Map<String, Object> map) implements ValueDi
     public String defaultLine() {
         return Optional.ofNullable(map.get("line"))
                 .map(Object::toString)
-                .orElse("<gray>[<aqua>{index}<gray>] <aqua>{name} <gray>- <aqua>{value}");
+                .orElse("[{index}] {name} - {value}");
     }
 
     @Override
