@@ -25,7 +25,7 @@ public interface MainConfig {
     }
 
     @ConfigPath(value = {"task", "save", "delay"}, priority = 4)
-    @Comment("How many ticks should the plugin wait before saving the leaderboard")
+    @Comment("How many milliseconds should the plugin wait before saving the leaderboard")
     default int getTaskSaveDelay() {
         return 0;
     }
@@ -37,7 +37,7 @@ public interface MainConfig {
     }
 
     @ConfigPath(value = {"task", "update", "delay"}, priority = 5)
-    @Comment("How many ticks should the plugin wait before updating the leaderboard")
+    @Comment("How many milliseconds should the plugin wait before updating the leaderboard")
     default int getTaskUpdateDelay() {
         return 0;
     }
@@ -53,7 +53,7 @@ public interface MainConfig {
 
     @ConfigPath(value = {"task", "update", "set-delay"}, priority = 5)
     @Comment({
-            "How many ticks should the plugin wait before applying the updated value to the entry",
+            "How many milliseconds should the plugin wait before applying the updated value to the entry",
             "Since the holder is updated partially, this is useful to prevent the plugin from applying the value too early",
             "and to allow the plugin to apply the value in larger batches, creating the illusion of a single update",
     })

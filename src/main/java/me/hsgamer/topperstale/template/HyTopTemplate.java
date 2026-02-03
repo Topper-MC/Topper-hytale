@@ -84,7 +84,20 @@ public class HyTopTemplate extends TopPlayerNumberTemplate {
 
     @Override
     public Agent createTask(Runnable runnable, NumberTopHolder.TaskType taskType, Map<String, Object> settings) {
-        return null; // TODO
+        switch (taskType) {
+            case STORAGE -> {
+                return plugin.getTaskManager().createTaskAgent(runnable, plugin.getMainConfig().getTaskSaveDelay());
+            }
+            case SET -> {
+                return plugin.getTaskManager().createTaskAgent(runnable, plugin.getMainConfig().getTaskUpdateSetDelay());
+            }
+            case UPDATE -> {
+                return plugin.getTaskManager().createTaskAgent(runnable, plugin.getMainConfig().getTaskUpdateDelay());
+            }
+            default -> {
+                return plugin.getTaskManager().createTaskAgent(runnable, 1000);
+            }
+        }
     }
 
     @Override
