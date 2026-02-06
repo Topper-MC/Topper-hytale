@@ -2,21 +2,12 @@ package me.hsgamer.topperstale.template;
 
 import me.hsgamer.topper.agent.update.UpdateAgent;
 import me.hsgamer.topper.template.topplayernumber.holder.NumberTopHolder;
-import me.hsgamer.topper.template.topplayernumber.holder.display.ValueDisplay;
 
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-public class HyTopHolderSettings implements NumberTopHolder.Settings {
-    private final Map<String, Object> map;
-    private final HyValueDisplaySettings valueDisplaySettings;
-
-    public HyTopHolderSettings(Map<String, Object> map) {
-        this.map = map;
-        this.valueDisplaySettings = new HyValueDisplaySettings(map);
-    }
-
+public record HyTopHolderSettings(Map<String, Object> map) implements NumberTopHolder.Settings {
     @Override
     public Double defaultValue() {
         return Optional.ofNullable(map.get("default-value"))
@@ -32,8 +23,24 @@ public class HyTopHolderSettings implements NumberTopHolder.Settings {
     }
 
     @Override
-    public ValueDisplay.Settings displaySettings() {
-        return valueDisplaySettings;
+    public String displayNullName() {
+        return Optional.ofNullable(map.get("null-name"))
+                .map(Object::toString)
+                .orElse("---");
+    }
+
+    @Override
+    public String displayNullUuid() {
+        return Optional.ofNullable(map.get("null-uuid"))
+                .map(Object::toString)
+                .orElse("---");
+    }
+
+    @Override
+    public String displayNullValue() {
+        return Optional.ofNullable(map.get("null-value"))
+                .map(Object::toString)
+                .orElse("---");
     }
 
     @Override
@@ -70,10 +77,6 @@ public class HyTopHolderSettings implements NumberTopHolder.Settings {
 
     @Override
     public Map<String, Object> valueProvider() {
-        return map;
-    }
-
-    public Map<String, Object> map() {
         return map;
     }
 }

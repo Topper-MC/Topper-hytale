@@ -13,7 +13,7 @@
         <java.version>25</java.version>
 
         <core.version>4.7.6</core.version>
-        <topper.version>4.14.0</topper.version>
+        <topper.version>4.16.1</topper.version>
     </properties>
 
     <build>

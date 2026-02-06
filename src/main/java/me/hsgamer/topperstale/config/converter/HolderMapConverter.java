@@ -12,8 +12,8 @@ public class HolderMapConverter extends StringMapConverter<NumberTopHolder.Setti
 
     @Override
     protected Object toRawValue(Object value) {
-        if (value instanceof HyTopHolderSettings hyTopHolderSettings) {
-            return hyTopHolderSettings.map();
+        if (value instanceof HyTopHolderSettings(java.util.Map<String, Object> map)) {
+            return map;
         }
         return null;
     }
