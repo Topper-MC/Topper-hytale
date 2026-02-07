@@ -90,14 +90,10 @@ public class PlaceholderAPIHook implements Hook {
             PlaceholderExpansion expansion = new PlaceholderExpansion() {
                 @Override
                 public @Nullable String onPlaceholderRequest(PlayerRef playerRef, @NotNull String params) {
-                    UUID uuid;
-                    if (playerRef == null || !playerRef.isValid()) {
-                        uuid = null;
-                    } else {
+                    UUID uuid = null;
+                    if (playerRef != null && playerRef.isValid()) {
                         Holder<EntityStore> holder = playerRef.getHolder();
-                        if (holder == null) {
-                            uuid = null;
-                        } else {
+                        if (holder != null) {
                             uuid = holder.ensureAndGetComponent(UUIDComponent.getComponentType()).getUuid();
                         }
                     }
