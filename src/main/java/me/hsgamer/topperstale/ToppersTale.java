@@ -11,6 +11,7 @@ import me.hsgamer.hscore.config.gson.GsonConfig;
 import me.hsgamer.hscore.config.proxy.ConfigGenerator;
 import me.hsgamer.topperstale.commands.ExampleCommand;
 import me.hsgamer.topperstale.config.MainConfig;
+import me.hsgamer.topperstale.manager.HookManager;
 import me.hsgamer.topperstale.manager.TaskManager;
 import me.hsgamer.topperstale.manager.ValueProviderManager;
 import me.hsgamer.topperstale.template.HyTopTemplate;
@@ -22,6 +23,7 @@ public class ToppersTale extends JavaPlugin {
     private final HyTopTemplate topTemplate;
     private final TaskManager taskManager;
     private final ValueProviderManager valueProviderManager;
+    private final HookManager hookManager;
 
     public ToppersTale(@Nonnull JavaPluginInit init) {
         super(init);
@@ -29,11 +31,15 @@ public class ToppersTale extends JavaPlugin {
         this.taskManager = new TaskManager(this);
         this.valueProviderManager = new ValueProviderManager(this);
         this.topTemplate = new HyTopTemplate(this);
+        this.hookManager = new HookManager(this);
     }
 
     @Override
     protected void setup() {
+        hookManager.init();
+        hookManager.call(HookManager.Hook::setup);
         topTemplate.enable();
+        hookManager.call(HookManager.Hook::start);
         getCommandRegistry().registerCommand(new ExampleCommand("message", "Message Command"));
         this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, event -> {
             Ref<EntityStore> playerRef = event.getPlayerRef();
@@ -45,6 +51,7 @@ public class ToppersTale extends JavaPlugin {
     protected void shutdown() {
         topTemplate.disable();
         taskManager.shutdown();
+        hookManager.call(HookManager.Hook::shutdown);
     }
 
     public MainConfig getMainConfig() {
