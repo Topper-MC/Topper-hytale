@@ -9,12 +9,12 @@ import com.hypixel.hytale.server.core.plugin.PluginBase;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import me.hsgamer.topper.hytale.TopperPlugin;
+import me.hsgamer.topper.hytale.manager.HookManager.Hook;
 import me.hsgamer.topper.query.forward.QueryForwardContext;
 import me.hsgamer.topper.value.core.ValueProvider;
 import me.hsgamer.topper.value.core.ValueWrapper;
 import me.hsgamer.topper.value.string.StringDeformatters;
-import me.hsgamer.topper.hytale.TopperPlugin;
-import me.hsgamer.topper.hytale.manager.HookManager.Hook;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

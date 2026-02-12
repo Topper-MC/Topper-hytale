@@ -1,10 +1,10 @@
 package me.hsgamer.topper.hytale.manager;
 
 import me.hsgamer.hscore.builder.FunctionalMassBuilder;
-import me.hsgamer.topper.value.core.ValueProvider;
 import me.hsgamer.topper.hytale.TopperPlugin;
 import me.hsgamer.topper.hytale.provider.PlayerValueProvider;
 import me.hsgamer.topper.hytale.provider.StatisticValueProvider;
+import me.hsgamer.topper.value.core.ValueProvider;
 
 import java.util.Map;
 import java.util.Objects;

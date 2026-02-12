@@ -3,6 +3,7 @@ package me.hsgamer.topper.hytale.template;
 import me.hsgamer.hscore.config.Config;
 import me.hsgamer.hscore.config.gson.GsonConfig;
 import me.hsgamer.topper.agent.core.Agent;
+import me.hsgamer.topper.hytale.TopperPlugin;
 import me.hsgamer.topper.storage.core.DataStorage;
 import me.hsgamer.topper.storage.flat.configfile.ConfigFileDataStorage;
 import me.hsgamer.topper.storage.flat.converter.NumberFlatValueConverter;
@@ -12,7 +13,6 @@ import me.hsgamer.topper.template.topplayernumber.TopPlayerNumberTemplate;
 import me.hsgamer.topper.template.topplayernumber.holder.NumberTopHolder;
 import me.hsgamer.topper.template.topplayernumber.manager.ReloadManager;
 import me.hsgamer.topper.value.core.ValueProvider;
-import me.hsgamer.topper.hytale.TopperPlugin;
 
 import javax.annotation.Nullable;
 import java.io.File;

@@ -1,8 +1,8 @@
 package me.hsgamer.topper.hytale.config.converter;
 
 import me.hsgamer.hscore.common.MapUtils;
-import me.hsgamer.topper.template.topplayernumber.holder.NumberTopHolder;
 import me.hsgamer.topper.hytale.template.HyTopHolderSettings;
+import me.hsgamer.topper.template.topplayernumber.holder.NumberTopHolder;
 
 public class HolderMapConverter extends StringMapConverter<NumberTopHolder.Settings> {
     @Override
