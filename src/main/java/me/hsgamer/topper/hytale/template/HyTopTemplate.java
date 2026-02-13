@@ -4,6 +4,8 @@ import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.server.core.entity.UUIDComponent;
 import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent;
+import com.hypixel.hytale.server.core.universe.PlayerRef;
+import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import me.hsgamer.hscore.config.Config;
@@ -57,6 +59,10 @@ public class HyTopTemplate extends TopPlayerNumberTemplate {
             public void reload() {
                 plugin.getMainConfig().reloadConfig();
             }
+        });
+        getNameProviderManager().setDefaultNameProvider(uuid -> {
+            PlayerRef player = Universe.get().getPlayer(uuid);
+            return player == null || !player.isValid() ? null : player.getUsername();
         });
     }
 
