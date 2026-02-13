@@ -119,6 +119,7 @@
                             <version>>= 1.0.2</version>
                         </optionalDependency>
                     </optionalDependencies>
+                    <includesAssetPack>true</includesAssetPack>
                 </configuration>
             </plugin>
         </plugins>

@@ -41,10 +41,10 @@ public class TopperPlugin extends JavaPlugin {
         topTemplate.enable();
         hookManager.call(HookManager.Hook::start);
         getCommandRegistry().registerCommand(new ExampleCommand("message", "Message Command"));
-        this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, event -> {
-            Ref<EntityStore> playerRef = event.getPlayerRef();
-            topTemplate.getTopManager().create(playerRef.getStore().ensureAndGetComponent(playerRef, UUIDComponent.getComponentType()).getUuid());
-        });
+//        this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, event -> {
+//            Ref<EntityStore> playerRef = event.getPlayerRef();
+//            topTemplate.getTopManager().create(playerRef.getStore().ensureAndGetComponent(playerRef, UUIDComponent.getComponentType()).getUuid());
+//        });
     }
 
     @Override
