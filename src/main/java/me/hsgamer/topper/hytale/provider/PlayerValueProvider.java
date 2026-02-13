@@ -1,21 +1,18 @@
 package me.hsgamer.topper.hytale.provider;
 
 import com.hypixel.hytale.builtin.adventure.memories.component.PlayerMemories;
-import com.hypixel.hytale.component.Holder;
+import com.hypixel.hytale.component.Ref;
+import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
-import com.hypixel.hytale.server.core.universe.Universe;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import me.hsgamer.topper.value.core.ValueProvider;
 import me.hsgamer.topper.value.core.ValueWrapper;
 
-import javax.annotation.Nonnull;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.function.Consumer;
 
-public class PlayerValueProvider implements ValueProvider<UUID, Double> {
+public class PlayerValueProvider implements PlayerWorldValueProvider<Double> {
     private final Type valueType;
 
     public PlayerValueProvider(Map<String, Object> settings) {
@@ -31,26 +28,25 @@ public class PlayerValueProvider implements ValueProvider<UUID, Double> {
                 .orElse(null);
     }
 
-    private @Nonnull ValueWrapper<Double> apply(@Nonnull UUID uuid) {
-        if (valueType == null) return ValueWrapper.notHandled();
-        PlayerRef player = Universe.get().getPlayer(uuid);
-        if (player == null) return ValueWrapper.notHandled();
-        Holder<EntityStore> holder = player.getHolder();
-        if (holder == null) return ValueWrapper.notHandled();
-        return switch (valueType) {
+    @Override
+    public void accept(PlayerRef playerRef, Ref<EntityStore> entityRef, Store<EntityStore> entityStore, Consumer<ValueWrapper<Double>> callback) {
+        switch (valueType) {
             case MEMORY -> {
-                PlayerMemories playerMemories = holder.getComponent(PlayerMemories.getComponentType());
-                if (playerMemories == null) yield ValueWrapper.notHandled();
+                PlayerMemories playerMemories = entityStore.getComponent(entityRef, PlayerMemories.getComponentType());
+                if (playerMemories == null) {
+                    callback.accept(ValueWrapper.notHandled());
+                    return;
+                }
                 double memoryCount = playerMemories.getRecordedMemories().size();
-                yield ValueWrapper.handled(memoryCount);
+                callback.accept(ValueWrapper.handled(memoryCount));
             }
-            default -> ValueWrapper.notHandled();
-        };
+            default -> callback.accept(ValueWrapper.notHandled());
+        }
     }
 
     @Override
-    public void accept(UUID uuid, Consumer<ValueWrapper<Double>> callback) {
-        callback.accept(apply(uuid));
+    public boolean isValid() {
+        return valueType != null;
     }
 
     public enum Type {
