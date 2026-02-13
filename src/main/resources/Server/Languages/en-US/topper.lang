@@ -1,1 +1,1 @@
-line = [{index}] {name} - <b>{value}</b>
+line = [{index}] {name} - {value}
