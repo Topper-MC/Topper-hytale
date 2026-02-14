@@ -122,6 +122,14 @@
                     <includesAssetPack>true</includesAssetPack>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>io.github.projectunified</groupId>
+                <artifactId>hytale-run-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <configuration>
+                    <artifactFile>${project.build.directory}/${project.build.finalName}-shaded.jar</artifactFile>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
