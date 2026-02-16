@@ -64,8 +64,8 @@ jobs:
         uses: HSGamer/action-mcreleaser@main
         with:
           files: |
-            **/target/topper-hytale-*-shaded.jar
-            **/target/topper-hytale-*-@(sources|javadoc).jar
+            target/topper-hytale-*-shaded.jar
+            target/topper-hytale-*-@(sources|javadoc).jar
         env:
           DESCRIPTION: ${{ steps.changelog.outputs.changelog }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
