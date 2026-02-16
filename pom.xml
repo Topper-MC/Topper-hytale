@@ -212,7 +212,7 @@
         <dependency>
             <groupId>at.helpch</groupId>
             <artifactId>placeholderapi-hytale</artifactId>
-            <version>1.0.4</version>
+            <version>1.0.6</version>
             <classifier>hytale</classifier>
             <scope>provided</scope>
         </dependency>
