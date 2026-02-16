@@ -14,10 +14,28 @@
     <developers>
         <developer>
             <name>HSGamer</name>
-            <url>https://hsgamer.me</url>
             <email>huynhqtienvtag@gmail.com</email>
+            <url>https://github.com/HSGamer</url>
         </developer>
     </developers>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://github.com/Topper-MC/Topper-hytale/blob/master/LICENSE</url>
+        </license>
+    </licenses>
+
+    <issueManagement>
+        <system>github</system>
+        <url>https://github.com/Topper-MC/Topper-hytale/issues</url>
+    </issueManagement>
+
+    <scm>
+        <connection>scm:git:https://github.com/Topper-MC/Topper-hytale.git</connection>
+        <developerConnection>scm:git:git@github.com:Topper-MC/Topper-hytale.git</developerConnection>
+        <url>https://github.com/Topper-MC/Topper-hytale</url>
+    </scm>
 
     <properties>
         <hytale.version>2026.01.22-6f8bdbdc4</hytale.version>
@@ -37,6 +55,36 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.4.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.12.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <source>${java.version}</source>
+                    <outputDirectory>${project.build.directory}/reports</outputDirectory>
                 </configuration>
             </plugin>
             <plugin>
@@ -217,4 +265,39 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>central</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.2.8</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>0.10.0</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <publishingServerId>central</publishingServerId>
+                            <autoPublish>true</autoPublish>
+                            <deploymentName>Topper-hytale</deploymentName>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
