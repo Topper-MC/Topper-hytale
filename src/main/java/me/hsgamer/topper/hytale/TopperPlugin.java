@@ -11,7 +11,7 @@ import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import me.hsgamer.hscore.config.gson.GsonConfig;
 import me.hsgamer.hscore.config.proxy.ConfigGenerator;
-import me.hsgamer.topper.hytale.commands.ExampleCommand;
+import me.hsgamer.topper.hytale.command.GetTopListCommand;
 import me.hsgamer.topper.hytale.config.MainConfig;
 import me.hsgamer.topper.hytale.manager.HookManager;
 import me.hsgamer.topper.hytale.manager.PlayerNameManager;
@@ -47,7 +47,9 @@ public class TopperPlugin extends JavaPlugin {
         topTemplate.enable();
         hookManager.call(HookManager.Hook::start);
         playerNameManager.setup();
-        getCommandRegistry().registerCommand(new ExampleCommand("message", "Message Command"));
+
+        getCommandRegistry().registerCommand(new GetTopListCommand(this));
+
         this.getEventRegistry().registerGlobal(PlayerReadyEvent.class, event -> {
             Ref<EntityStore> playerRef = event.getPlayer().getReference();
             assert playerRef != null && !playerRef.isValid();
