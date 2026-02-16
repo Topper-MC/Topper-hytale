@@ -1,13 +1,5 @@
 package me.hsgamer.topper.hytale.template;
 
-import com.hypixel.hytale.component.Ref;
-import com.hypixel.hytale.component.Store;
-import com.hypixel.hytale.server.core.entity.UUIDComponent;
-import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent;
-import com.hypixel.hytale.server.core.universe.PlayerRef;
-import com.hypixel.hytale.server.core.universe.Universe;
-import com.hypixel.hytale.server.core.universe.world.World;
-import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import me.hsgamer.hscore.config.Config;
 import me.hsgamer.hscore.config.gson.GsonConfig;
 import me.hsgamer.topper.agent.core.Agent;
@@ -60,10 +52,7 @@ public class HyTopTemplate extends TopPlayerNumberTemplate {
                 plugin.getMainConfig().reloadConfig();
             }
         });
-        getNameProviderManager().setDefaultNameProvider(uuid -> {
-            PlayerRef player = Universe.get().getPlayer(uuid);
-            return player == null || !player.isValid() ? null : player.getUsername();
-        });
+        getNameProviderManager().setDefaultNameProvider(uuid -> plugin.getPlayerNameManager().getName(uuid));
     }
 
     @Override
@@ -118,18 +107,5 @@ public class HyTopTemplate extends TopPlayerNumberTemplate {
     @Override
     public void logWarning(String message, @Nullable Throwable throwable) {
         plugin.getLogger().at(Level.WARNING).withCause(throwable).log(message);
-    }
-
-    public void onPlayerReady(PlayerReadyEvent event) {
-        Ref<EntityStore> playerRef = event.getPlayer().getReference();
-        assert playerRef != null && !playerRef.isValid();
-        Store<EntityStore> store = playerRef.getStore();
-        World world = store.getExternalData().getWorld();
-        world.execute(() -> {
-            UUIDComponent uuidComponent = store.getComponent(playerRef, UUIDComponent.getComponentType());
-            assert uuidComponent != null;
-            UUID playerUUID = uuidComponent.getUuid();
-            getTopManager().create(playerUUID);
-        });
     }
 }
