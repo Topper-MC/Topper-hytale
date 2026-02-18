@@ -69,3 +69,14 @@ jobs:
         env:
           DESCRIPTION: ${{ steps.changelog.outputs.changelog }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+          CURSEFORGE_PROJECT: 1463678
+          CURSEFORGE_TYPE: hytale
+          CURSEFORGE_RELATIONS: |
+            [
+              {
+                "slug": "placeholder-api",
+                "type": "optionalDependency"
+              }
+            ]
