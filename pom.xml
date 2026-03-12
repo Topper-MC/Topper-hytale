@@ -42,7 +42,7 @@
         <hytale.version>2026.02.18-f3b8fff95</hytale.version>
         <java.version>25</java.version>
 
-        <core.version>4.7.6</core.version>
+        <core.version>4.8.0</core.version>
         <topper.version>4.17.0</topper.version>
     </properties>
 
