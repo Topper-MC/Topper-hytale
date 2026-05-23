@@ -69,7 +69,7 @@ public class PlaceholderAPIHook implements Hook {
                 callback.accept(ValueWrapper.error(throwable));
                 return;
             }
-            callback.accept(ValueWrapper.handled(parsed.equals(placeholder) ? null : parsed));
+            callback.accept(parsed.equals(placeholder) ? ValueWrapper.notHandled() : ValueWrapper.handled(parsed));
         }
     }
 
