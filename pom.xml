@@ -39,7 +39,7 @@
     </scm>
 
     <properties>
-        <hytale.version>2026.04.16-5cbd1e160</hytale.version>
+        <hytale.version>2026.05.07-5efa15f6d</hytale.version>
         <java.version>25</java.version>
 
         <core.version>4.8.1</core.version>
